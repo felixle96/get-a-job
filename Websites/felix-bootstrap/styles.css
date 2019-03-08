@@ -1,0 +1,7 @@
+.background {
+    background: url('dnd-bg4.jpg') center no-repeat fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}

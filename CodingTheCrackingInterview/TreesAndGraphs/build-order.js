@@ -1,3 +1,113 @@
+class Project {
+    constructor(name) {
+        this.name = name;
+        this.dependents = [];
+        this.dependencies = 0;
+    }
+
+    addDependent(dependent) { 
+        this.dependents.push(dependent)
+    }
+
+    getDependents() {
+        return this.dependents;
+    }
+
+    getDependentNames() {
+        return this.dependents.map(function(dependent) {
+            return dependent.name;
+        })
+    }
+
+    getDependencies() {
+        return this.dependencies;
+    }
+
+    incrementDependencies() {
+        this.dependencies = this.dependencies + 1;
+    }
+
+    decrementDependencies() {
+        this.dependencies = this.dependencies - 1;
+    }
+}
+
+class Graph {
+    constructor() {
+        this.projectMap = new Map();
+    }
+
+    addProject(name) {
+        this.projectMap.set(name, new Project(name));
+    }
+
+    getProject(name) {
+        return this.projectMap.get(name);
+    }
+
+    addProjectDependency(project, dependency) {
+        let proj = this.getProject(project);
+        let dep = this.getProject(dependency);
+
+        dep.addDependent(proj);
+        proj.incrementDependencies();
+    }
+}
+
+function findBuildOrder(projects, dependencies) {
+    let graph = new Graph();
+    let built = [];
+
+    projects.forEach((project) => {
+        graph.addProject(project);
+    });
+
+    dependencies.forEach((pair) => {
+        let project = pair[1];
+        let dependency = pair[0];
+        graph.addProjectDependency(project, dependency);
+    })
+
+    // console.log('1time');
+    addNondependent(projects, graph, built);
+
+    let i = 0;
+    while (built.length < projects.length) {
+        let curr = built[i];
+
+        if (!curr) {    // no nondependents 
+            return false;
+        }
+
+        let dependents = graph.getProject(curr).getDependents();
+
+        dependents.forEach(function(proj) {
+            proj.decrementDependencies();
+        });
+
+        addNondependent(graph.getProject(curr).getDependentNames(), graph, built);
+
+        i++;
+    }
+
+    return built;
+}
+
+function addNondependent(projects, graph, dependents) {
+    // console.log('projects: ', projects, ' , dependents: ', dependents);
+    projects.forEach(function(project) {
+        let proj = graph.getProject(project);
+        // console.log('graph: ', graph.projectMap);
+        // console.log('project: ', project, ' , proj: ', proj, ' , dependents: ', dependents);
+        if(proj.getDependencies() === 0) {  // build this project
+            let deps = proj.getDependents();
+
+            dependents.push(proj.name);
+        }
+    });
+}
+
+
 function attemptToBuild(project, dependencies, builds, order) {
 
     function build (project, dependencies, builds) {
@@ -79,11 +189,12 @@ function buildOrder(projects, dependencies) {
 
 function main() {
     let projects = ["a", "b", "c", "d", "e", "f", "g", "h"];
-    let dependencies = [['a', 'd'], ['f', 'b'], ['b', 'd'], ['f', 'a'], ['d', 'c'], ['b', 'a'], ["g", "e"], ["h", "g"], ["e", "h"]];
+    let dependencies = [['a', 'd'], ['f', 'b'], ['b', 'd'], ['f', 'a'], ['d', 'c'], ['b', 'a'], ["g", "e"], ["h", "g"]];
 
     console.log('projects: ', projects);
     console.log('dependencies: \n', dependencies);
     console.log('buildOrder(): ', buildOrder(projects, dependencies));
+    console.log('findBuildOrder(): ', findBuildOrder(projects, dependencies));
 }
 
 main();

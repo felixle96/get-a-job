@@ -108,14 +108,12 @@ function getLeftMostChild(curr) {
     if (curr === null) {    // reached end of tree
         return null;
     } else {    // continue searching tree
-        let left = getLeftMostChild(curr.left);
-        let right;
 
-        if (left) { // found left most child
-            return left;
-        } else {
-            return curr;
-        }
+        while (curr.left !== null) {
+            curr = curr.left;
+        } 
+
+        return curr;
     }
 }
 

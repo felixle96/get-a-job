@@ -1,14 +1,11 @@
-const stdin = process.stdin;
 
-stdin.on('data', function(data) {
-    // User input exit.
-    if(data === 'exit\n'){
-        // Program exit.
-        console.log("User input complete, program exit.");
-        process.exit();
-    }else
-    {
-        // Print user input in console.
-        console.log('User Input Data : ' + data);
-    }
-});
+
+// for(let i = 0; i < 10; i++) {
+//     setTimeout(() => {
+//         console.log('timer');
+//     }, 2000);
+// }
+
+while (true) {
+    setTimeout(() => console.log(1), 0)
+  }

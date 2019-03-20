@@ -1,7 +1,7 @@
 const play = require('audio-play');
 const load = require('audio-loader');
  
-let playBack = load('C:/Users/FelixLe/Music/Songs/"James TW - Ex (Acoustic)"').then(function(audioBuffer) {
+let playBack = load('./JamesTW-Ex(Acoustic)').then(function(audioBuffer) {
     return play(audioBuffer, {
         start: 0,
         end: audioBuffer.duration,

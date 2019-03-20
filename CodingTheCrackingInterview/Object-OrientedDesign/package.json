@@ -1,0 +1,14 @@
+{
+  "name": "object-orienteddesign",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jukebox.js",
+  "scripts": {
+    "test": "node jukebox.js"
+  },
+  "author": "Felix",
+  "license": "ISC",
+  "dependencies": {
+    "audio-play": "^2.2.1"
+  }
+}

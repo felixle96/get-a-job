@@ -1,3 +1,8 @@
+/**
+ * Recursive approach with no memoization.
+ * Time: O(3^n), Space: O(n)
+ * @param {*} n 
+ */
 function tripleStep(n) {
     let possWays = 0;
 
@@ -24,11 +29,8 @@ function tripleStep(n) {
     return possWays;
 };
 /**
- * O(4) = O(3) + O(2) + O(1) = 4 + 2 + 1
- * O(3) = O(2) + O(1) + O(0) = 2 + 1 + 1;
- * O(2) = O(1) + O(0) = 1 + 1;
- * O(1) = O(0) = 1;
- * O(0) = 1;
+ * Recursive approach with memoization.
+ * Time: O(n), Space: O(n)
  * @param {*} n 
  */
 function tripleStep1(n) {
@@ -62,6 +64,11 @@ function tripleStep1(n) {
     return paths[n];
 }
 
+/**
+ * Iterative approach with memoization.
+ * Time: O(n), Space: O(n)
+ * @param {*} n 
+ */
 function tripleStep2(n) {
     let paths = [1, 1, 2];
 
@@ -76,6 +83,11 @@ function tripleStep2(n) {
     return paths[n];
 }
 
+/**
+ * Iterative approach with memoization of only previous three steps.
+ * Time: O(n), Space: O(1)
+ * @param {*} n 
+ */
 function tripleStep3(n) {
     let first = 1;
     let second  = 1;

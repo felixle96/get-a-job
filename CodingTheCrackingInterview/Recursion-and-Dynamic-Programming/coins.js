@@ -57,12 +57,53 @@ function coins1(n) {
     return result;
 }
 
+function coins2(n) {
+    let values = [25, 10, 5, 1];
+    result = 0;
+    cache = new Map();
+
+    function createAmount(curr, coin = 0) {
+        let entry = cache.get(curr);
+        if (entry !== undefined && entry[coin] !== undefined) {   // value computed already
+            return entry[coin];
+        }
+
+        if (coin >= values.length - 1) {    // reached last denom
+            return 1;
+        }
+
+        // compute number of ways
+        let ways = 0, i = 0;
+        do {
+            ways += createAmount(curr - values[coin] * i, coin + 1);
+            i++;
+        } while(curr - values[coin] * i >= 0);
+
+        // store computed value;
+        if (entry === undefined) {
+            let newEntry = Array(4).fill(undefined);
+            newEntry[coin] = ways;
+            cache.set(curr, newEntry);
+        } else {
+            entry[coin] = ways;
+        }
+
+        return ways;
+    }
+
+    let ways = createAmount(n);
+    console.log('cache: ');
+    console.log(cache);
+    return ways;
+}
+
 function main() {
-    let n = 11143;    
+    let n = 29;    
 
     console.log('n: ', n);
-    console.log('coins(): ', coins(n));
+    console.log('coins2(): ', coins2(n));
     console.log('coins1(): ', coins1(n));
+    console.log('coins(): ', coins(n));
 }
 
 main();

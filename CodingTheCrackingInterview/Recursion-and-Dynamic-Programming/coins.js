@@ -1,3 +1,8 @@
+/**
+ * Solve by choosing the largest coin currently chosen, 
+ * or a smaller coin to avoid dups.
+ * @param {*} n 
+ */
 function coins(n) {
     let change = [25, 10, 5, 1];
     let result = 0;
@@ -28,6 +33,12 @@ function coins(n) {
     return result;
 }
 
+
+/**
+ * Solve by choosing all amounts of a coin and then
+ * doing the same for the smaller coins.
+ * @param {*} n 
+ */
 function coins1(n) {
     let values = [25, 10, 5, 1];
     let result = 0;
@@ -57,6 +68,12 @@ function coins1(n) {
     return result;
 }
 
+/**
+ * Solve by choosing all amounts of a coin and then 
+ * doing the same for the smaller coins. Uses caching/
+ * memoization to speed up time. 
+ * @param {*} n 
+ */
 function coins2(n) {
     let values = [25, 10, 5, 1];
     result = 0;

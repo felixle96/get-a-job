@@ -33,7 +33,7 @@ function searchRotatedArray(rotatedArray, val) {
             if(left === right) {    // finished binary search but value not found
                 return false;
             } else if (val < arr[middle]) { // value smaller than middle
-                if (arr[left] <= arr[middle]) { // rotation not in left half
+                if (arr[left] < arr[middle]) { // rotation not in left half
                     if (val >= arr[left]) { // search left half
                         return binarySearch(arr, val, left, middle - 1);
                     } else {    // search right half
@@ -43,7 +43,7 @@ function searchRotatedArray(rotatedArray, val) {
                     return binarySearch(arr, val, left, middle - 1);
                 }
             } else {    // value is is larger than middle
-                if (arr[right] >= arr[middle]) {    // rotation not in right half
+                if (arr[right] > arr[middle]) {    // rotation not in right half
                     if (val <= arr[right]) {    // search right half
                         return binarySearch(arr, val, middle + 1, right);
                     } else {    // search left half
@@ -61,6 +61,7 @@ function searchRotatedArray(rotatedArray, val) {
 
 function main() {
     let rotatedArray = [15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14];
+    // let rotatedArray = [2, 2, 2, 3, 4, 2];
 
     for (let i = 0; i < rotatedArray.length; i++) {
         let find = rotatedArray[i];
@@ -69,7 +70,7 @@ function main() {
         console.log(`searchRotatedArray([${rotatedArray}], ${find}): `, found);
     }
 
-    let find = 27;
+    let find = 30;
     let found = searchRotatedArray(rotatedArray, find);
 
     console.log(`searchRotatedArray([${rotatedArray}], ${find}): `, found);

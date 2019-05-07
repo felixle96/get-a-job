@@ -14,7 +14,9 @@
  */
 
 /**
- * Find a value in a rotated array that was originally in sorted order.
+ * Find a value in a rotated array that was originally in sorted order. Will
+ * not work if there are duplicates such that left, middle, and right are the same value 
+ * because then have to search both halves.
  * 
  * @param {*} rotatedArray An array rotated an unknown number of times. 
  * @param {*} val Value to find in rotatedArray.
@@ -60,8 +62,8 @@ function searchRotatedArray(rotatedArray, val) {
 }
 
 function main() {
-    let rotatedArray = [15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14];
-    // let rotatedArray = [2, 2, 2, 3, 4, 2];
+    // let rotatedArray = [15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14];
+    let rotatedArray = [2, 2, 2, 0, 1, 2];
 
     for (let i = 0; i < rotatedArray.length; i++) {
         let find = rotatedArray[i];
@@ -70,7 +72,7 @@ function main() {
         console.log(`searchRotatedArray([${rotatedArray}], ${find}): `, found);
     }
 
-    let find = 30;
+    let find = -1;
     let found = searchRotatedArray(rotatedArray, find);
 
     console.log(`searchRotatedArray([${rotatedArray}], ${find}): `, found);

@@ -11,7 +11,7 @@
  *  Space Complexity: O(1) iterative, O(logn) recursive
  *  Do a modified binary search on the rotated array by
  *  adjusting for the rotation.
- */
+ ******************************************************************************/
 
 /**
  * Find a value in a rotated array that was originally in sorted order.
